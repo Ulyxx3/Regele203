@@ -1,7 +1,596 @@
-.menu ul {
-  list-style-type: none;
+/* =============================================
+   Crousti Movies - Feuille de style principale
+   ============================================= */
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+/* --- Reset de base --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.menu li {
-  display: inline;
+/* --- Couleurs et variables --- */
+:root {
+    --couleur-fond: #0d0d1a;
+    --couleur-carte: #1a1a2e;
+    --couleur-menu: #16213e;
+    --couleur-accent: #e94560;
+    --couleur-or: #f5a623;
+    --couleur-texte: #eaeaea;
+    --couleur-texte-doux: #9a9ab0;
+    --couleur-bordure: #2a2a4a;
+}
+
+/* --- Corps de la page --- */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--couleur-fond);
+    color: var(--couleur-texte);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* =============================================
+   EN-TÊTE & NAVIGATION
+   ============================================= */
+
+header {
+    background-color: var(--couleur-menu);
+    border-bottom: 2px solid var(--couleur-accent);
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-interieur {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 0;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+}
+
+.logo h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--couleur-texte);
+}
+
+.logo h1 span {
+    color: var(--couleur-accent);
+}
+
+/* --- Menu de navigation --- */
+nav ul {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+nav ul li {
+    position: relative;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--couleur-texte);
+    font-size: 0.9rem;
+    font-weight: 400;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: background-color 0.2s, color 0.2s;
+    display: block;
+    white-space: nowrap;
+}
+
+nav ul li a:hover {
+    background-color: var(--couleur-accent);
+    color: white;
+}
+
+/* Lien actif */
+nav ul li a.actif {
+    background-color: var(--couleur-accent);
+    color: white;
+}
+
+/* Bouton Ajouter un film */
+.btn-ajouter {
+    background-color: var(--couleur-or) !important;
+    color: #000 !important;
+    font-weight: 600 !important;
+    border-radius: 6px;
+}
+
+.btn-ajouter:hover {
+    background-color: #d4911e !important;
+    color: #000 !important;
+}
+
+/* --- Sous-menu Genres --- */
+.sous-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--couleur-carte);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: 6px;
+    min-width: 180px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    z-index: 200;
+}
+
+nav ul li:hover .sous-menu {
+    display: block;
+}
+
+.sous-menu li {
+    display: block;
+}
+
+.sous-menu li a {
+    padding: 0.6rem 1.2rem;
+    border-radius: 0;
+    font-size: 0.85rem;
+}
+
+.sous-menu li:first-child a {
+    border-radius: 6px 6px 0 0;
+}
+
+.sous-menu li:last-child a {
+    border-radius: 0 0 6px 6px;
+}
+
+/* =============================================
+   CONTENU PRINCIPAL
+   ============================================= */
+
+main {
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    width: 100%;
+}
+
+/* Titre de section */
+.titre-section {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--couleur-texte);
+    border-left: 4px solid var(--couleur-accent);
+    padding-left: 1rem;
+}
+
+/* =============================================
+   GRILLE DE FILMS (index & catégorie)
+   ============================================= */
+
+.grille-films {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Carte d'un film */
+.carte-film {
+    background-color: var(--couleur-carte);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--couleur-bordure);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.carte-film:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(233, 69, 96, 0.2);
+}
+
+.carte-film a {
+    text-decoration: none;
+    color: var(--couleur-texte);
+    display: block;
+}
+
+.carte-film img {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    display: block;
+    background-color: #2a2a4a;
+}
+
+/* Image par défaut si pas d'affiche */
+.carte-film img.img-defaut {
+    object-fit: contain;
+    padding: 1rem;
+    opacity: 0.5;
+}
+
+.carte-film .infos-carte {
+    padding: 0.8rem;
+}
+
+.carte-film .titre-film {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    line-height: 1.3;
+}
+
+.carte-film .annee-film {
+    font-size: 0.8rem;
+    color: var(--couleur-texte-doux);
+}
+
+.carte-film .genre-film {
+    font-size: 0.75rem;
+    color: var(--couleur-accent);
+    margin-top: 0.3rem;
+}
+
+/* =============================================
+   PAGE D'UN FILM
+   ============================================= */
+
+.film-detail {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+}
+
+.film-affiche {
+    flex: 0 0 250px;
+}
+
+.film-affiche img {
+    width: 100%;
+    border-radius: 10px;
+    border: 2px solid var(--couleur-bordure);
+}
+
+.film-infos {
+    flex: 1;
+    min-width: 250px;
+}
+
+.film-titre {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+}
+
+.film-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.film-meta span {
+    font-size: 0.9rem;
+    color: var(--couleur-texte-doux);
+    background-color: var(--couleur-carte);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    border: 1px solid var(--couleur-bordure);
+}
+
+.film-meta .badge-genre {
+    color: var(--couleur-accent);
+    border-color: var(--couleur-accent);
+}
+
+.film-note-moyenne {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--couleur-or);
+    margin-bottom: 1rem;
+}
+
+.film-resume {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--couleur-texte-doux);
+    margin-bottom: 1rem;
+    text-align: justify;
+}
+
+.film-detail-ligne {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    color: var(--couleur-texte-doux);
+}
+
+.film-detail-ligne strong {
+    color: var(--couleur-texte);
+}
+
+/* Bande annonce */
+.bande-annonce {
+    margin-top: 1.5rem;
+}
+
+.bande-annonce h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--couleur-accent);
+    padding-left: 0.8rem;
+}
+
+.bande-annonce iframe {
+    width: 100%;
+    max-width: 600px;
+    height: 340px;
+    border-radius: 10px;
+    border: none;
+}
+
+/* =============================================
+   SECTION COMMENTAIRES
+   ============================================= */
+
+.section-commentaires {
+    margin-top: 2rem;
+}
+
+.section-commentaires h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid var(--couleur-accent);
+    padding-left: 0.8rem;
+}
+
+.commentaire {
+    background-color: var(--couleur-carte);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.commentaire-entete {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.6rem;
+}
+
+.commentaire-pseudo {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.commentaire-note {
+    color: var(--couleur-or);
+    font-size: 0.9rem;
+}
+
+.commentaire-date {
+    font-size: 0.8rem;
+    color: var(--couleur-texte-doux);
+}
+
+.commentaire-texte {
+    font-size: 0.9rem;
+    color: var(--couleur-texte-doux);
+    line-height: 1.6;
+    margin-top: 0.4rem;
+}
+
+.btn-supprimer {
+    font-size: 0.75rem;
+    color: #ff6b6b;
+    text-decoration: none;
+    background: none;
+    border: 1px solid #ff6b6b;
+    border-radius: 4px;
+    padding: 0.2rem 0.6rem;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-supprimer:hover {
+    background-color: #ff6b6b;
+    color: white;
+}
+
+/* =============================================
+   FORMULAIRES
+   ============================================= */
+
+.section-formulaire {
+    margin-top: 2rem;
+    background-color: var(--couleur-carte);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: 10px;
+    padding: 1.5rem;
+}
+
+.section-formulaire h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    border-left: 4px solid var(--couleur-accent);
+    padding-left: 0.8rem;
+}
+
+.formulaire-groupe {
+    margin-bottom: 1rem;
+}
+
+.formulaire-groupe label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    color: var(--couleur-texte);
+}
+
+.formulaire-groupe input,
+.formulaire-groupe textarea,
+.formulaire-groupe select {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    background-color: var(--couleur-fond);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: 6px;
+    color: var(--couleur-texte);
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    transition: border-color 0.2s;
+}
+
+.formulaire-groupe input:focus,
+.formulaire-groupe textarea:focus,
+.formulaire-groupe select:focus {
+    outline: none;
+    border-color: var(--couleur-accent);
+}
+
+.formulaire-groupe select option {
+    background-color: var(--couleur-carte);
+    color: var(--couleur-texte);
+}
+
+.formulaire-groupe textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Lien "Ajouter un genre" dans le formulaire */
+.lien-genre {
+    display: inline-block;
+    margin-top: 0.4rem;
+    font-size: 0.8rem;
+    color: var(--couleur-or);
+    text-decoration: none;
+}
+
+.lien-genre:hover {
+    text-decoration: underline;
+}
+
+/* Bouton de validation */
+.btn-valider {
+    display: inline-block;
+    padding: 0.7rem 2rem;
+    background-color: var(--couleur-accent);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-valider:hover {
+    background-color: #c73652;
+    transform: translateY(-1px);
+}
+
+/* Messages d'erreur */
+.erreur {
+    background-color: rgba(233, 69, 96, 0.15);
+    border: 1px solid var(--couleur-accent);
+    border-radius: 6px;
+    padding: 0.8rem 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #ff8fa3;
+}
+
+/* =============================================
+   PIED DE PAGE
+   ============================================= */
+
+footer {
+    background-color: var(--couleur-menu);
+    border-top: 2px solid var(--couleur-bordure);
+    padding: 1.5rem 2rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--couleur-texte-doux);
+    margin-top: auto;
+}
+
+footer a {
+    color: var(--couleur-or);
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+
+@media (max-width: 768px) {
+    .header-interieur {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav ul {
+        gap: 0.3rem;
+    }
+
+    nav ul li a {
+        padding: 0.4rem 0.7rem;
+        font-size: 0.85rem;
+    }
+
+    .film-detail {
+        flex-direction: column;
+    }
+
+    .film-affiche {
+        flex: none;
+        width: 200px;
+        margin: 0 auto;
+    }
+
+    .grille-films {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .grille-films {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .film-titre {
+        font-size: 1.5rem;
+    }
 }
