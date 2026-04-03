@@ -77,7 +77,11 @@ $commentaires = $sth->fetchAll();
 
     <p class="film-detail-ligne"><strong>Réalisateur :</strong> <?php echo $film['realisateur']; ?></p>
     <p class="film-detail-ligne"><strong>Acteurs :</strong> <?php echo $film['acteurs']; ?></p>
+
+    <!-- Bouton pour modifier le film -->
+    <a href="modifier_film.php?id=<?php echo $id_film; ?>" class="btn-modifier">✏️ Modifier ce film</a>
   </div>
+
 </div>
 
 <!-- Bande annonce -->

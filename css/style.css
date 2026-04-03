@@ -516,6 +516,28 @@ main {
     transform: translateY(-1px);
 }
 
+/* Bouton modifier un film */
+.btn-modifier {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.6rem 1.5rem;
+    background-color: transparent;
+    color: var(--couleur-texte-doux);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: 6px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s, background-color 0.2s;
+}
+
+.btn-modifier:hover {
+    border-color: var(--couleur-or);
+    color: var(--couleur-or);
+    background-color: rgba(245, 166, 35, 0.08);
+}
+
+
 /* Messages d'erreur */
 .erreur {
     background-color: rgba(233, 69, 96, 0.15);
